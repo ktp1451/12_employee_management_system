@@ -1,10 +1,6 @@
 const inquirer = require("inquirer");
 const connection = require('./db/connection')
 
-connection.query("SELECT * from department", function(err, data){
-    console.log(data)
-})
-
 const runSearch = () => {
     inquirer
       .prompt({
@@ -22,16 +18,16 @@ const runSearch = () => {
       })
       
       .then(function (answer) {
-        if (answer.first === "VIEW") {
+        if (answer.action === "VIEW") {
             view.viewData();
         }
-        else if (answer.first === "ADD") {
+        else if (answer.action === "ADD") {
             add.addData();
         }
-        else if (answer.first === "DELETE") {
+        else if (answer.action === "DELETE") {
             deletD.deleteData();
         }
-        else if (answer.first === "UPDATE") {
+        else if (answer.action === "UPDATE") {
             up.updateData();
         }
         else {
