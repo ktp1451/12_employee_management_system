@@ -11,38 +11,32 @@ const runSearch = () => {
         name: 'action',
         type: 'list',
         message: 'What would you like to do?',
-        choices: [
+        choices: 
+        [
           'View All Employees',
-          'View All Employees By Department',
-          'View All Employees By Manager',
           'Add Employee',
           'Remove Employee',
           'Update Employee Role',
-          "Update Employee Manager",
           'exit',
         ],
       })
-      .then((answer) => {
-        switch (answer.action) {
-          case 'Find Employee':
-            employeeSearch();
-            break;
-  
-          case 'Find employee by department':
-            departmentSearch();
-            break;
-  
-          case 'Find employee by manager':
-            managerSearch();
-            break;
-  
-          case 'Exit':
-            connection.end();
-            break;
-  
-          default:
-            console.log(`Invalid action: ${answer.action}`);
-            break;
+      
+      .then(function (answer) {
+        if (answer.first === "VIEW") {
+            view.viewData();
         }
-      });
-  };
+        else if (answer.first === "ADD") {
+            add.addData();
+        }
+        else if (answer.first === "DELETE") {
+            deletD.deleteData();
+        }
+        else if (answer.first === "UPDATE") {
+            up.updateData();
+        }
+        else {
+            console.table("Goodbye!")
+            connection.end();
+        }
+    });
+}
