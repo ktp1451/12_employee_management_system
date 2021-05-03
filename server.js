@@ -20,16 +20,16 @@ const runSearch = () => {
       .then(function (answer) {
         console.log(answer);
         if (answer.action === "View All Employees") {
-            view.viewData();
+            viewData();
         }
         else if (answer.action === "Add Employee") {
-            add.addEmployee();
+            addEmployee();
         }
         else if (answer.action === "Remove Employee") {
-            deletD.deleteData();
+            deleteData();
         }
         else if (answer.action === "Update Employee Role") {
-            up.updateData();
+            updateData();
         }
         else {
             console.table("Goodbye!")
@@ -65,20 +65,20 @@ function addEmployee () {
                     type: "input",
                     message: "What's the last name of the employee?",
                 },
-                {
-                    name: "addEmployeeRole",
-                    type: "list",
-                    message: "What is the employee's role?",
-                    choices: function () {
-                        var roleArray = [];
-                        for (var i = 0; i < res.length; i++) {
-                            roleArray.push(res[i].role_id);
-                        }
-                        let removeDups = new Set(roleArray)
-                        let newRoleArr = [...removeDups]; 
-                        return newRoleArr;
-                    },
-                },
+                // {
+                //     name: "addEmployeeRole",
+                //     type: "list",
+                //     message: "What is the employee's role?",
+                //     choices: function () {
+                //         var roleArray = [];
+                //         for (var i = 0; i < res.length; i++) {
+                //             roleArray.push(res[i].role_id);
+                //         }
+                //         let removeDups = new Set(roleArray)
+                //         let newRoleArr = [...removeDups]; 
+                //         return newRoleArr;
+                //     },
+                // },
                 ]).then(function (answer) {
                     connection.query(
                         "INSERT INTO employee SET ?",
@@ -97,3 +97,8 @@ function addEmployee () {
         }
     )
 }
+
+function quit() {
+    console.log("Goodbye!");
+    process.exit();
+  }
